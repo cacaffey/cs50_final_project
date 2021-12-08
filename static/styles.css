@@ -1,0 +1,80 @@
+/* Set CSS colors across all pages  */
+:root {
+  --white: #F0F0F0;  
+  --black: #000000; 
+  --highlight-yellow: #fff0b3;
+  --dark-gray: #A9A9A9;
+  --navcolor: #D8BFD8;
+}
+
+.row {
+    display: flex;
+  }
+
+.column {
+    flex: 33.33%;
+    padding: 5px;
+  }
+
+.token {
+  color: var(--black);
+  cursor: pointer;
+}
+
+.token-grayed {
+  color: var(--dark-gray);
+}
+
+.token:hover {
+  background-color: var(--highlight-yellow);
+}
+
+img {
+  width: 40%;
+  height: auto;
+}
+
+.standard-text {
+  font-size: 18px;
+  text-align: center;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.headline-text {
+  font-size: 50px;
+}
+
+.enhanced-text {
+  font-size: 25px;
+}
+
+.sources {
+  width: 100%;
+  border: 1px solid var(--black);
+}
+
+/* Adjust Table Centering */
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table th {
+  padding: 0.25em 4em; /* https://www.w3.org/Style/Examples/007/units.en.html#:~:text=The%20em%20is%20simply%20the,sizes%20will%20be%20in%20proportion. */
+}
+
+.table-borderless {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+.spacer {
+  padding-bottom: 20px;
+}

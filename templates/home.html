@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home | 首页
+{% endblock %}
+
+{% block main %}
+    <!-- Homepage image and welcome text--> 
+    <body>
+        <div class="container"> 
+          <div class="section">
+              <p> <img src="static/hsk.jpeg" class="standard-image standard-border"> </p>
+          </div>
+  
+          <div class="standard-text">
+              <p>大家好! Welcome, everyone to my final project for CS50. &#128187;</p>
+          </div>
+
+          <div class="standard-text">
+          <p><b>"Zhournalism"</b> (a portmanteau of "<u>zhongwen</u>" (中文; Mandarin for "Chinese") and "<u>journalism</u>") is a novel study tool designed to make studying the latest news headlines engaging and easy. 
+              The tool scrapes the latest headlines, identifies any HSK* vocabulary therein, and allows the user to interact with the text: &#128045; mousing over the word will display the Pinyin, and a 	&#x1f3af; click reveals the English translation(s).</p>
+              
+            <p>*HSK (Hanyu Shuiping Kaoshi; 汉语水平考试), literally "Chinese Level Exam", is a standardized set of 5000 Chinese characters, and is often used as a measure of a student's Mandarin level. There are currently 6 levels. This is slated to expand to 9 levels in 2022.</p>
+          </div>
+  
+          <!-- Explore button (leads to study page) -->
+          <div class="standard-text">
+            <a id="lets-go" class="btn btn-primary" href="/studying">Let's go!</a>
+          </div>
+  
+      </body>
+{% endblock %}
+
+
+
+
+
+

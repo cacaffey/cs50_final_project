@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Study | 学习
+{% endblock %}
+
+{% block main %}
+        <div class="enhanced-text">
+            <p>
+                Woohoo! Time to hit the books. &#128218; 
+            </p>
+
+        </div>
+        <div class="standard-text">
+            <p>Once you click the button below, you'll see a recent news headline from People's Daily or the New York Times.</p>
+            <p>Remember, &#128045; <u>mousing</u> over the word will display the Pinyin, and a 	&#x1f3af; <u>click</u> reveals the English translation(s) as well.</p>
+            <p>You can save any vocab word by clicking the save button below it.</p><br>
+        </div>
+
+        <div class="standard-text">
+            <b><p>Select your headline difficulty:</p></b>
+            <a href="/studying?max_hsk_level=4" class="btn btn-primary">Max HSK 4.</a>
+            <a href="/studying?max_hsk_level=5" class="btn btn-primary">Max HSK 5.</a>
+            <a href="/studying?max_hsk_level=6" class="btn btn-primary">Max HSK 6.</a><br>
+        </div>
+
+        <br><div class="enhanced-text">
+            <p>
+                Let's go! 开始吧!
+            </p>
+        </div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Review | 复习
+{% endblock %}
+
+{% block JavaScript %}
+    <script>
+        // Get fully loaded DOM content
+        document.addEventListener('DOMContentLoaded', function() {
+            let deleteButtons = document.getElementsByClassName("delete-word");
+
+            for (let deleteButton of deleteButtons) {
+                deleteButton.addEventListener("click", function(){
+                    fetch("/deleteword", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({id: deleteButton.dataset.id})
+                    }).then(function(){
+                        deleteButton.innerHTML="Removed";
+                        deleteButton.className="btn btn-secondary disabled";
+                    });
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    <div class="mb-3">
+        <div class="section table">
+            <!-- Create table to display history of viewed headlines -->
+            <h2>Headline History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Title</th>
+                        <th>Date Viewed</th>
+                        <th>Max HSK Level</th>
+                        <th>Full Article Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for headline in viewed_headlines %}
+                        <tr> 
+                            <td>{{ headline['source'] }}</td>
+                            <td>{{ headline['title'] }}</td>
+                            <td>{{ headline['date_viewed'] }}</td>
+                            <td>{{ headline['highest_hsk_level'] }}</td>
+                            <td><a href="{{ headline['link'] }}">{{ headline['link'] }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
+    <div class="mb-3">
+        <div class="section table" id="vocab-table">
+            <!-- Create table to display history of saved vocabulary -->
+            <h2>Saved Vocabulary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>HSK Level</th>
+                        <th>Hanzi</th>
+                        <th>Pinyin</th>
+                        <th>Translation(s)</th>
+                        <th>Remove Word</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vocab in saved_vocab %}
+                        <tr> 
+                            <td>{{ vocab['hsk_level'] }}</td>
+                            <td>{{ vocab['hanzi'] }}</td>
+                            <td>{{ vocab['pinyin'] }}</td>
+                            <td>{{ vocab['translations'] }}</td>
+                            <td>
+                                <a class="btn btn-primary delete-word" data-id="{{ vocab['id'] }}">x</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
+    <div>
+        <a href="/downloadcsv" class="btn btn-primary" id="download-csv-button">Download Vocabulary as CSV</a>
+    </div>
+{% endblock %}

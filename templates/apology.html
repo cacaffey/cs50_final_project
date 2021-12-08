@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology | 抱歉
+{% endblock %}
+
+{% block main %}
+    <!-- https://memegen.link/ -->
+    <img alt="{{ top }}" class="border img-fluid" src="http://memegen.link/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?alt=https://media.tenor.com/images/4f9336ce08a8dd84e807e4fa8367eda4/tenor.png&width=400" title="{{ top }}">
+{% endblock %}

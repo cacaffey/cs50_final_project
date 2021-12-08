@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register | 注册
+{% endblock %}
+
+<!-- Code reused from Finance problem set -->
+{% block main %}
+    <form action="/register" method="POST">
+        <div class="mb-3">
+            <p>Enter a username. Must be 8 - 20 alphanumeric characters.</p>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <p>Enter a password. Must be 8 - 20 alphanumeric characters.</p>
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <p>Re-enter password to confirm.</p>
+            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <div class="mb-3">
+            <p>Enter your HSK level (1 - 6). If you're not sure, try this quick <a href="https://wumaocorp.com/hskcheck/quiz/quick-test" target="_blank" >test</a> to get an approximation.</p>
+            <input class="form-control mx-auto w-auto" id="hsklevel" name="hsklevel" placeholder="#" type="number" min="1" max="6">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+{% endblock %}

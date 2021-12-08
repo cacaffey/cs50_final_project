@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Study | 学习
+{% endblock %}
+
+{% block JavaScript %}
+    <script>
+        // Get fully loaded DOM content
+        document.addEventListener('DOMContentLoaded', function() {
+            let tokenSpans = document.getElementsByClassName("token");
+            let savewordbutton = document.getElementById("save-word");
+
+            for (let tokenSpan of tokenSpans) {
+                tokenSpan.addEventListener("click", function(){
+                    let pinyin = document.getElementById("clicked-pinyin");
+                    pinyin.innerHTML = tokenSpan.dataset.pinyin;
+
+                    let hanzi = document.getElementById("clicked-hanzi");
+                    hanzi.innerHTML = tokenSpan.dataset.hanzi;
+
+                    let translations = document.getElementById("clicked-translations");
+                    translations.innerHTML = tokenSpan.dataset.translations.replace("[", "").replace("]", "").replaceAll("'", "");
+
+                    // Pass in id of clicked word to save word button by setting data attribute of the button equal to the id of the token
+                    savewordbutton.dataset.id = tokenSpan.dataset.id;
+
+                    savewordbutton.innerHTML="Save word";
+                    savewordbutton.className="btn btn-primary";
+
+                    document.getElementById("clicked-token").style="";
+                });
+            }
+            savewordbutton.addEventListener("click", function(){
+                fetch("/saveword", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({id: savewordbutton.dataset.id})
+                }).then(function(response){
+                    if (response.status === 201) {
+                        savewordbutton.innerHTML="Saved!";
+                        savewordbutton.className="btn btn-secondary disabled";
+                    }
+                    else {
+                        savewordbutton.innerHTML="Word already saved.";
+                        savewordbutton.className="btn btn-secondary disabled";
+                    }
+                    
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+        <div class="mb-5 table" id="tokens">
+            <table> 
+                <tr>
+                    {% for token in token_dict_list %}
+                        <td><span data-hsk-level="{{ token.hsk_level }}">{% if 'hsk_level' in token %}HSK {{ token.hsk_level }}{% endif %}</span></td>
+                    {% endfor %}
+                </tr>
+                <tr class="headline-text">
+                    {% for token in token_dict_list %}
+                        <td><span class="{{ token.class }}" title="{{ token.pinyin }}" data-hanzi="{{ token.token }}" data-hsk-level="{{ token.hsk_level }}" data-pinyin="{{ token.pinyin }}" data-translations="{{ token.translations }}" data-id="{{ token.id }}">{{ token.token }}</span></td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+
+        <div class="mb-3">
+            {{ ('Read the full article') }} <a href="{{ headline_link }}">{{ 'here' }}</a>{{ '.'}}
+       </div>
+
+       <div class="mb-3">
+        <a href="#" onclick="window.location.reload()" class="btn btn-success">&#128260; New headline</a>
+       </div><br>
+
+        <div class="table-borderless" id="clicked-token" style="display: none">
+            <table> 
+                <tr>
+                    <td id="clicked-pinyin"></td>
+                </tr>
+                <tr>
+                    <td class="headline-text" id="clicked-hanzi"></td>
+                </tr>
+                <tr>
+                    <td class="spacer" id="clicked-translations"></td>
+                </tr>
+                <tr>
+                    <td>
+                    <a id="save-word" class="btn btn-primary">Save word</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+{% endblock %}
